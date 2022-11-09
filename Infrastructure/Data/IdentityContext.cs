@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class BusinessContext : DbContext
+    public class IdentityContext : IdentityDbContext
     {
-        public BusinessContext(DbContextOptions<BusinessContext> options) : base(options) { }
+        public IdentityContext(DbContextOptions<IdentityContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
