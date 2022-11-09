@@ -1,12 +1,12 @@
 # .NET 6 MVC Template
+Template for ASP.NET MVC Web App Projects, with User Management included. Designed by following Onion Architecture
 
 ## Included
-- User Management
-- Onion Architecture
 - EntityFramework Core
 - Identity
 - RepositoryManager
 - ServiceManager
+- NPM (TailwindCSS, Autoprefixer, PostCSS)
 
 ## NuGet
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore Version=6.0.11
