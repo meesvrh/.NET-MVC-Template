@@ -15,9 +15,9 @@
 <body class="dark:bg-gray-900">
     <header>
         @if (signInManager.IsSignedIn(User)) {
-            <partial name="_SideBar.cshtml" />
+                        <partial name="_NavBar.cshtml" />
         } else {
-            <partial name="_NavBar.cshtml" />
+            <partial name="_SideBar.cshtml" />
         }
     </header>
     
