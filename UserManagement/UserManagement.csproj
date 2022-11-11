@@ -23,7 +23,7 @@
 
     <Target Name="CheckForNpm" BeforeTargets="NpmInstall">
 	    <Exec Command="npm -v" ContinueOnError="true">
-		    <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+		    <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
 	    </Exec>
 	    <Error Condition="'$(ErrorCode)' != '0'" Text="You must install NPM!" />
     </Target>

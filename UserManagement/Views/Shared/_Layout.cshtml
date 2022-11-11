@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="~/UserManagement.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
 </head>
-<body class="dark:bg-gray-900">
+<body class="dark:bg-gray-900 h-screen">
     <header>
         @if (signInManager.IsSignedIn(User)) {
-                        <partial name="_NavBar.cshtml" />
-        } else {
             <partial name="_SideBar.cshtml" />
+        } else {
+            <partial name="_NavBar.cshtml" />
         }
     </header>
     
-    <div class="container w-full text-white">
+    <div class="container mx-auto text-white">
         @RenderBody()
     </div>
 

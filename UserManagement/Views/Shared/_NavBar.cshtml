@@ -1,13 +1,13 @@
-﻿<nav class="p-3 fixed w-full top-0 border-b-2 dark:border-gray-600">
+﻿<nav class="p-3 w-full top-0 border-b-2 dark:border-gray-600">
     <div class="flex flex-wrap justify-between items-center">
-        <a href="/" class="flex gap-2">
+        <a asp-action="Index" asp-controller="Home" class="flex gap-2 items-center">
             <i class="fas fa-user-cog text-2xl dark:text-blue-600"></i>
-            <span class="text-xl font-semibold underline  dark:text-gray-300 dark:decoration-blue-600">User Management</span>
+            <span class="text-2xl font-semibold underline  dark:text-white dark:decoration-blue-600">User Management</span>
         </a>
-        <button type="button" class="dark:text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <a asp-action="Login" asp-controller="Account" type="button" class="dark:text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Login
             <i class="fas fa-arrow-right-to-bracket"></i>
-        </button>
+        </a>
     </div>
 </nav>
 
