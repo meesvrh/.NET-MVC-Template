@@ -17,6 +17,14 @@
                 </h1>
                 <form asp-action="Register" method="post" class="space-y-4 md:space-y-6">
                     <div>
+                        <label asp-for="FirstName" class="block mb-2 text-sm font-medium dark:text-white"></label>
+                        <input asp-for="FirstName" class="border sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required="">
+                    </div>
+                    <div>
+                        <label asp-for="LastName" class="block mb-2 text-sm font-medium dark:text-white"></label>
+                        <input asp-for="LastName" class="border sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required="">
+                    </div>
+                    <div>
                         <label asp-for="Email" class="block mb-2 text-sm font-medium dark:text-white"></label>
                         <input asp-for="Email" class="border sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
                     </div>

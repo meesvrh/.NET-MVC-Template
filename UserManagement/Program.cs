@@ -1,8 +1,15 @@
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services.Contracts;
+using Services;
+using Domain.Services;
+using Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IRepoManager, RepoManager>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

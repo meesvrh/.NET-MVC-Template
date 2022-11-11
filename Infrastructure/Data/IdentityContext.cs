@@ -30,10 +30,10 @@ namespace Infrastructure.Data
                 new IdentityUser
                 {
                     Id = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                    UserName = "Admin",
-                    NormalizedUserName = "ADMIN",
+                    UserName = "Admin@localhost.com",
+                    NormalizedUserName = "ADMIN@LOCALHOST.COM",
                     Email = "Admin@localhost.com",
-                    NormalizedEmail = "ADMIN@LOCALHOST",
+                    NormalizedEmail = "ADMIN@LOCALHOST.COM",
                     EmailConfirmed = true,
                     PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "Admin1234!"),
                     SecurityStamp = string.Empty

@@ -2,12 +2,11 @@
     <div class="relative overflow-y-auto py-4 px-3 h-full rounded dark:bg-gray-800">
         <div class="flex flex-col items-center">
             <img class="w-28 h-28 mb-3 rounded-full border-1 dark:border-gray-600" src="./img/user-placeholder.jpg" />
-            <span class="font-semibold dark:text-white">User Name 
+            <span class="font-semibold dark:text-white">@User.Identity.Name
                 @if (User.IsInRole("Admin")) {
                     <i class="fas fa-star dark:text-orange-400"></i>
                 }
             </span>
-            <span class="font-medium dark:text-gray-300">admin@localhost.com</span>
         </div>
         <hr class="my-4 h-1 rounded border-0 dark:bg-gray-700">
         <ul class="space-y-2">
@@ -27,9 +26,9 @@
         </ul>
         <div class="absolute w-full bottom-0 left-0 py-4 px-3">
             <hr class="my-4 h-1 rounded border-0 dark:bg-gray-700">
-            <button type="button" class="border focus:ring-4 w-full focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+            <a asp-action="Logout" asp-controller="Account" type="button" class="border focus:ring-4 w-full focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
                 Logout <i class="fas fa-arrow-right-from-bracket"></i>
-            </button>
+            </a>
         </div>
     </div>
 </aside>

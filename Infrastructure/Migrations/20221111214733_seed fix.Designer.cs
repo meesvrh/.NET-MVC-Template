@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20221111214733_seed fix")]
+    partial class seedfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = "fab4fac1-c546-41de-aebc-a14da6895711",
-                            ConcurrencyStamp = "e3936889-7659-4628-8ce8-f6dab857011a",
+                            ConcurrencyStamp = "70a8a95c-f815-48ae-8d2b-2e5264c57943",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -152,17 +155,17 @@ namespace Infrastructure.Migrations
                         {
                             Id = "c7b013f0-5201-4317-abd8-c211f91b7330",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "650e65f5-d193-41f2-9a2d-571536369c2a",
+                            ConcurrencyStamp = "4fdd88af-75b3-4039-a869-653914f2e8b1",
                             Email = "Admin@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
-                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELuokjplb2K2CJI0w0jLL7Oj4s84EyDRkwao9OYgYuRH+kWI6ZXKRswLn23oKUSK8w==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAELcdRtk8YwmGFHOxmiUMQaTBuXG6ATigJ1sWGdGcvxZP5503ODSJ4TiZ4sjNA2yjQA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "Admin@localhost.com"
+                            UserName = "Admin"
                         });
                 });
 

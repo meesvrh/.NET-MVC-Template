@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Services.Contracts;
+using System.Data;
 using UserManagement.Models;
 
 namespace UserManagement.Controllers
@@ -7,6 +10,17 @@ namespace UserManagement.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IServiceManager _serviceManager;
+
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IServiceManager serviceManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _serviceManager = serviceManager;
+        }
+
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -16,14 +30,26 @@ namespace UserManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> LoginAsync(LoginViewModel loginViewModel)
         {
-            return View();
-        }   
+            if (!ModelState.IsValid) return View(loginViewModel);
 
-        public IActionResult Logout()
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
+
+            if (!result.Succeeded) {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+
+                return View(loginViewModel);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
@@ -35,9 +61,19 @@ namespace UserManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            return View();
+            if (!ModelState.IsValid) return View(registerViewModel);
+
+            var user = new IdentityUser { UserName = registerViewModel.Email, Email = registerViewModel.Email };
+            
+            var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+
+            if (!result.Succeeded) ModelState.AddModelError(string.Empty, "Invalid register attempt.");
+
+            await _signInManager.SignInAsync(user, isPersistent: true);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
