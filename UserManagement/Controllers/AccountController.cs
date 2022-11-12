@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
@@ -66,9 +67,9 @@ namespace UserManagement.Controllers
         {
             if (!ModelState.IsValid) return View(registerViewModel);
 
-            var user = new IdentityUser { UserName = registerViewModel.Email, Email = registerViewModel.Email };
+            var identityUser = new IdentityUser { UserName = registerViewModel.Email, Email = registerViewModel.Email };
             
-            var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+            var result = await _userManager.CreateAsync(identityUser, registerViewModel.Password);
 
             if (!result.Succeeded)
             {
@@ -77,7 +78,18 @@ namespace UserManagement.Controllers
                 return View(registerViewModel);
             }
 
-            await _signInManager.SignInAsync(user, isPersistent: true);
+            var applicationUser = new User { Email = registerViewModel.Email, FirstName = registerViewModel.FirstName, LastName = registerViewModel.LastName };
+            
+            var serviceResult = await _serviceManager.User.InsertAsync(applicationUser);
+
+            if (!serviceResult.Success) 
+            {
+                await _userManager.DeleteAsync(identityUser);
+
+                return View(registerViewModel);
+            }
+
+            await _signInManager.SignInAsync(identityUser, isPersistent: true);
 
             return RedirectToAction("Index", "Home");
         }

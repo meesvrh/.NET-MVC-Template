@@ -24,6 +24,8 @@ namespace Infrastructure.Data
                 new User
                 {
                     Id = 1,
+                    FirstName = "Admin",
+                    LastName = "Admin",
                     Email = "admin@localhost.com"
                 }
             );
