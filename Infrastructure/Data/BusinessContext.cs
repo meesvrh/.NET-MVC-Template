@@ -10,6 +10,8 @@ namespace Infrastructure.Data
 {
     public class BusinessContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+
         public BusinessContext(DbContextOptions<BusinessContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

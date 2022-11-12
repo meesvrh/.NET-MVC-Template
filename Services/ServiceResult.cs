@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Contracts
+namespace Services
 {
-    public interface IServiceManager
+    public class ServiceResult
     {
-        IUserService User { get; }
+        public bool Success { get; set; }
+        public string Message { get; set; }
     }
 }

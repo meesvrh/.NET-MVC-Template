@@ -36,7 +36,8 @@ namespace UserManagement.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
 
-            if (!result.Succeeded) {
+            if (!result.Succeeded) 
+            {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
 
                 return View(loginViewModel);
@@ -69,7 +70,12 @@ namespace UserManagement.Controllers
             
             var result = await _userManager.CreateAsync(user, registerViewModel.Password);
 
-            if (!result.Succeeded) ModelState.AddModelError(string.Empty, "Invalid register attempt.");
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid register attempt.");
+
+                return View(registerViewModel);
+            }
 
             await _signInManager.SignInAsync(user, isPersistent: true);
 

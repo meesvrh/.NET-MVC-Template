@@ -12,14 +12,14 @@ namespace Infrastructure.Repositories
     {
         private readonly BusinessContext _context;
 
-        // private IUserRepo _userRepo;
+        private IUserRepo _userRepo;
 
         public RepoManager(BusinessContext context)
         {
             _context = context;
         }
 
-        // public IUserRepo User => _userRepo ??= new UserRepo(_context);
+        public IUserRepo User => _userRepo ??= new UserRepo(_context);
 
         public void Save() => _context.SaveChanges();
 

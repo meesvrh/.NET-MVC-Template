@@ -12,13 +12,13 @@ namespace Services
     {
         private readonly IRepoManager _repoManager;
 
-        // private IUserService _userService
+        private IUserService _userService;
 
         public ServiceManager(IRepoManager repoManager)
         {
             _repoManager = repoManager;
         }
 
-        // public IUserService User => _userService ??= new UserService(_repoManager);
+        public IUserService User => _userService ??= new UserService(_repoManager);
     }
 }
