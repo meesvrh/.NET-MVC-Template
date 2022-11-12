@@ -7,6 +7,7 @@ Template for ASP.NET MVC Web App Projects, with User Management included. Design
 - RepositoryManager
 - ServiceManager
 - NPM (TailwindCSS, Autoprefixer, PostCSS)
+- FlowBite (CSS addition for TailwindCSS)
 
 ## NuGet
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore Version=6.0.11
