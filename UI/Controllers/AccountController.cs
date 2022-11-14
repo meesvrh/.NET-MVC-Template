@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using System.Data;
-using UserManagement.Models;
+using UI.Models;
 
-namespace UserManagement.Controllers
+namespace UI.Controllers
 {
     [Authorize]
     public class AccountController : Controller
