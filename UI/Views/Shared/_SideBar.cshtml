@@ -1,17 +1,26 @@
-﻿<aside class="w-64 h-screen" aria-label="Sidebar">
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> userManager
+
+@{
+    var user = userManager.GetUserAsync(User);
+}
+
+<aside class="w-64 h-screen" aria-label="Sidebar">
     <div class="relative overflow-y-auto py-4 px-3 h-full rounded dark:bg-gray-800">
         <div class="flex flex-col items-center">
-            <img class="w-28 h-28 mb-3 rounded-full border-1 dark:border-gray-600" src="./img/user-placeholder.jpg" />
-            <span class="font-semibold dark:text-white">@User.Identity.Name
+            <img class="w-28 h-28 mb-3 rounded-full border-1 dark:border-gray-600" src="~/img/user-placeholder.jpg" />
+            <span class="font-semibold dark:text-white">@user.Result.FullName
                 @if (User.IsInRole("Admin")) {
                     <i class="fas fa-star dark:text-orange-400"></i>
                 }
             </span>
+            <span class="font-medium dark:text-gray-300">@user.Result.Email</span>
         </div>
         <hr class="my-4 h-1 rounded border-0 dark:bg-gray-700">
         <ul class="space-y-2">
             <li>
-                <a href="#" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white dark:hover:bg-gray-700">
+                <a asp-action="Dashboard" asp-controller="Home" class="flex items-center p-2 text-base font-normal rounded-lg dark:text-white dark:hover:bg-gray-700">
                     <i class="fas fa-table-columns ml-2 dark:text-gray-400 dark:group-hover:text-white"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>

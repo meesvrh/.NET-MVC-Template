@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal sealed class UserRepo : GenericRepo<User>, IUserRepo
+    internal sealed class UserRepo : GenericRepo<UserData>, IUserRepo
     {
         private readonly BusinessContext _context;
 
@@ -18,6 +18,6 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public User GetByEmail(string email) => _context.Users.FirstOrDefault(u => u.Email == email);
+        public UserData GetByEmail(string email) => _context.UserData.FirstOrDefault(u => u.Email == email);
     }
 }

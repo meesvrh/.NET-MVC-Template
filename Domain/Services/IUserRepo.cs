@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public interface IUserRepo : IGenericRepo<User>
+    public interface IUserRepo : IGenericRepo<UserData>
     {
-        User GetByEmail(string email);
+        UserData GetByEmail(string email);
     }
 }

@@ -11,11 +11,11 @@ namespace UI.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IServiceManager _serviceManager;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IServiceManager serviceManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IServiceManager serviceManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -44,7 +44,7 @@ namespace UI.Controllers
                 return View(loginViewModel);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
 
         public async Task<IActionResult> Logout()
@@ -67,7 +67,12 @@ namespace UI.Controllers
         {
             if (!ModelState.IsValid) return View(registerViewModel);
 
-            var identityUser = new IdentityUser { UserName = registerViewModel.Email, Email = registerViewModel.Email };
+            var identityUser = new ApplicationUser { 
+                UserName = registerViewModel.Email, 
+                Email = registerViewModel.Email, 
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName
+            };
             
             var result = await _userManager.CreateAsync(identityUser, registerViewModel.Password);
 
@@ -77,10 +82,10 @@ namespace UI.Controllers
 
                 return View(registerViewModel);
             }
-
-            var applicationUser = new User { Email = registerViewModel.Email, FirstName = registerViewModel.FirstName, LastName = registerViewModel.LastName };
             
-            var serviceResult = await _serviceManager.User.InsertAsync(applicationUser);
+            var userData = new UserData { Email = registerViewModel.Email };
+            
+            var serviceResult = await _serviceManager.User.InsertAsync(userData);
 
             if (!serviceResult.Success) 
             {
@@ -91,7 +96,7 @@ namespace UI.Controllers
 
             await _signInManager.SignInAsync(identityUser, isPersistent: true);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
 
         [AllowAnonymous]

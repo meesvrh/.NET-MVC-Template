@@ -15,9 +15,11 @@ namespace Services
 
         public UserService(IRepoManager repoManager) => _repoManager = repoManager;
 
-        public User GetByEmail(string email) => _repoManager.User.GetByEmail(email);
+        public IEnumerable<UserData> GetAll() => _repoManager.User.GetAll();
 
-        public async Task<ServiceResult> InsertAsync(User user)
+        public UserData GetByEmail(string email) => _repoManager.User.GetByEmail(email);
+
+        public async Task<ServiceResult> InsertAsync(UserData user)
         {
             try
             {

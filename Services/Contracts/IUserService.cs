@@ -9,8 +9,10 @@ namespace Services.Contracts
 {
     public interface IUserService
     {
-        User GetByEmail(string email);
+        IEnumerable<UserData> GetAll();
+
+        UserData GetByEmail(string email);
         
-        Task<ServiceResult> InsertAsync(User user);
+        Task<ServiceResult> InsertAsync(UserData user);
     }
 }

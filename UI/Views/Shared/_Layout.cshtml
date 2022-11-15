@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser> signInManager
+@inject SignInManager<ApplicationUser> signInManager
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -14,17 +14,21 @@
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
 </head>
 <body class="dark:bg-gray-900 h-screen">
-    <header>
-        @if (signInManager.IsSignedIn(User)) {
+    @if (signInManager.IsSignedIn(User)) {
+        <div class="flex">
             <partial name="_SideBar.cshtml" />
-        } else {
+            <div class="container dark:text-white">
+                @RenderBody()
+            </div>
+        </div>
+    } else {
+        <header>
             <partial name="_NavBar.cshtml" />
-        }
-    </header>
-    
-    <div class="container mx-auto dark:text-white">
-        @RenderBody()
-    </div>
+        </header>
+        <div class="container mx-auto dark:text-white">
+            @RenderBody()
+        </div>
+    }
 
     <footer>
     </footer>

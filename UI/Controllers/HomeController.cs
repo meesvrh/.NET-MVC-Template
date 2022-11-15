@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Services.Contracts;
 using System.Diagnostics;
 using UI.Models;
 
@@ -8,11 +9,10 @@ namespace UI.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        
-        public HomeController()
-        {
 
-        }
+        private readonly IServiceManager _serviceManager;
+
+        public HomeController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -21,8 +21,13 @@ namespace UI.Controllers
         }
 
         public IActionResult Dashboard()
-        {
-            return View();
+        {   
+            var dashboardVM = new DashboardViewModel
+            {
+                Users = _serviceManager.User.GetAll(),
+            };
+
+            return View(dashboardVM);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Infrastructure.Data
 {
     public class BusinessContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserData> UserData { get; set; }
 
         public BusinessContext(DbContextOptions<BusinessContext> options) : base(options) { }
 
@@ -18,14 +18,11 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<UserData>().HasIndex(u => u.Email).IsUnique();
 
-            modelBuilder.Entity<User>().HasData(
-                new User
+            modelBuilder.Entity<UserData>().HasData(
+                new UserData
                 {
-                    Id = 1,
-                    FirstName = "Admin",
-                    LastName = "Admin",
                     Email = "admin@localhost.com"
                 }
             );
