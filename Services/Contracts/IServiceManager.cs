@@ -8,6 +8,6 @@ namespace Services.Contracts
 {
     public interface IServiceManager
     {
-        IUserService User { get; }
+        IUserDataService User { get; }
     }
 }

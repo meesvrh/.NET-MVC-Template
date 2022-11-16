@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Contracts
 {
-    public interface IUserService
+    public interface IUserDataService
     {
         IEnumerable<UserData> GetAll();
 

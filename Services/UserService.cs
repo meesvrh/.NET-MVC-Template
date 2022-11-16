@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    internal sealed class UserService : IUserService
+    internal sealed class UserDataService : IUserDataService
     {
         private readonly IRepoManager _repoManager;
 
-        public UserService(IRepoManager repoManager) => _repoManager = repoManager;
+        public UserDataService(IRepoManager repoManager) => _repoManager = repoManager;
 
         public IEnumerable<UserData> GetAll() => _repoManager.User.GetAll();
 
