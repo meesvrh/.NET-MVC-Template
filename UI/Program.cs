@@ -16,7 +16,6 @@ builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddControllersWithViews();
 
 // Identity 
-
 builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Identity")));
 
