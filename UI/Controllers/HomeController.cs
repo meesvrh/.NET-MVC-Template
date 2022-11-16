@@ -9,7 +9,6 @@ namespace UI.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
         private readonly IServiceManager _serviceManager;
 
         public HomeController(IServiceManager serviceManager) => _serviceManager = serviceManager;
@@ -17,17 +16,17 @@ namespace UI.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Dashboard()
-        {   
-            var dashboardVM = new DashboardViewModel
+            if (User.Identity.IsAuthenticated)
             {
-                Users = _serviceManager.User.GetAll(),
-            };
+                var dashboardVM = new DashboardViewModel
+                {
+                    Users = _serviceManager.User.GetAll(),
+                };
 
-            return View(dashboardVM);
+                return View("Dashboard", dashboardVM);
+            }
+
+            return View();
         }
     }
 }

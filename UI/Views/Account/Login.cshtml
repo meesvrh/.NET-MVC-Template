@@ -9,6 +9,7 @@
     Sign in to your account
 </h1>
 <form class="space-y-4 md:space-y-6" asp-action="Login" metohd="post">
+    <div class="font-medium text-base dark:text-rose-600" asp-validation-summary="All"></div>
     <div>
         <label asp-for="Email" class="block mb-2 text-sm font-medium dark:text-white"></label>
         <input asp-for="Email" class="border sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@address.com" required="">

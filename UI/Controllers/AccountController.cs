@@ -25,7 +25,7 @@ namespace UI.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View();
+            return User.Identity.IsAuthenticated ? RedirectToAction("Index", "Home") : View();
         }
 
         [HttpPost]
@@ -35,16 +35,17 @@ namespace UI.Controllers
         {
             if (!ModelState.IsValid) return View(loginViewModel);
 
-            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
+            if (!await DoesEmailExist(loginViewModel.Email, false)) return View(loginViewModel);
 
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
+            
             if (!result.Succeeded) 
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-
+                ModelState.AddModelError(string.Empty, "Password not correct.");
                 return View(loginViewModel);
             }
 
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
@@ -57,7 +58,7 @@ namespace UI.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();
+            return User.Identity.IsAuthenticated ? RedirectToAction("Index", "Home") : View();
         }
 
         [HttpPost]
@@ -73,13 +74,16 @@ namespace UI.Controllers
                 FirstName = registerViewModel.FirstName,
                 LastName = registerViewModel.LastName
             };
-            
+
+            if (await DoesEmailExist(registerViewModel.Email, true)) return View(registerViewModel);
+
+            if (!await IsPasswordValid(identityUser, registerViewModel.Password)) return View(registerViewModel);
+
             var result = await _userManager.CreateAsync(identityUser, registerViewModel.Password);
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Invalid register attempt.");
-
+                ModelState.AddModelError(string.Empty, "Oops! Something went wrong.");
                 return View(registerViewModel);
             }
             
@@ -90,13 +94,13 @@ namespace UI.Controllers
             if (!serviceResult.Success) 
             {
                 await _userManager.DeleteAsync(identityUser);
-
+                ModelState.AddModelError(string.Empty, "Oops! Something went wrong.");
                 return View(registerViewModel);
             }
 
             await _signInManager.SignInAsync(identityUser, isPersistent: true);
 
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
@@ -111,6 +115,41 @@ namespace UI.Controllers
         public IActionResult ResetPassword(string email)
         {
             return View("ForgotPassword");
+        }
+
+        private async Task<bool> IsPasswordValid(ApplicationUser user, string password)
+        {
+            var passwordValidator = new PasswordValidator<ApplicationUser>();
+
+            var result = await passwordValidator.ValidateAsync(_userManager, user, password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            
+            return result.Succeeded;
+        }
+
+        private async Task<bool> DoesEmailExist(string email, bool errorIf)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null && errorIf == true)
+            {
+                ModelState.AddModelError(string.Empty, "E-mail address already exists.");
+            }
+
+            if (user == null && errorIf == false)
+            {
+                ModelState.AddModelError(string.Empty, "E-mail address not found.");
+            }
+
+            return user == null ? false : true;
+           
         }
     }
 }
