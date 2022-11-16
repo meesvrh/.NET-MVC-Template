@@ -89,7 +89,7 @@ namespace UI.Controllers
             
             var userData = new UserData { Email = registerViewModel.Email };
             
-            var serviceResult = await _serviceManager.User.InsertAsync(userData);
+            var serviceResult = await _serviceManager.UserData.InsertAsync(userData);
 
             if (!serviceResult.Success) 
             {

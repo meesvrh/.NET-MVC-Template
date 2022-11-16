@@ -8,7 +8,7 @@ namespace Domain.Services
 {
     public interface IRepoManager
     {
-        IUserRepo User { get; }
+        IUserDataRepo UserData { get; }
 
         void Save();
 

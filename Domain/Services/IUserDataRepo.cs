@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public interface IUserRepo : IGenericRepo<UserData>
+    public interface IUserDataRepo : IGenericRepo<UserData>
     {
         UserData GetByEmail(string email);
     }

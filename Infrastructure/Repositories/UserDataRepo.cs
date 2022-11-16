@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal sealed class UserRepo : GenericRepo<UserData>, IUserRepo
+    internal sealed class UserDataRepo : GenericRepo<UserData>, IUserDataRepo
     {
         private readonly BusinessContext _context;
 
-        public UserRepo(BusinessContext context) : base(context)
+        public UserDataRepo(BusinessContext context) : base(context)
         {
             _context = context;
         }

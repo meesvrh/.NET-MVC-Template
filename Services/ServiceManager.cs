@@ -19,6 +19,6 @@ namespace Services
             _repoManager = repoManager;
         }
 
-        public IUserDataService User => _UserDataService ??= new UserDataService(_repoManager);
+        public IUserDataService UserData => _UserDataService ??= new UserDataService(_repoManager);
     }
 }

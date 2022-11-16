@@ -15,15 +15,15 @@ namespace Services
 
         public UserDataService(IRepoManager repoManager) => _repoManager = repoManager;
 
-        public IEnumerable<UserData> GetAll() => _repoManager.User.GetAll();
+        public IEnumerable<UserData> GetAll() => _repoManager.UserData.GetAll();
 
-        public UserData GetByEmail(string email) => _repoManager.User.GetByEmail(email);
+        public UserData GetByEmail(string email) => _repoManager.UserData.GetByEmail(email);
 
         public async Task<ServiceResult> InsertAsync(UserData user)
         {
             try
             {
-                _repoManager.User.Insert(user);
+                _repoManager.UserData.Insert(user);
                 await _repoManager.SaveAsync();
 
                 return new ServiceResult() { Success = true };

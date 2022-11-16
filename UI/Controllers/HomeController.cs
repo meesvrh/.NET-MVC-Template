@@ -20,7 +20,7 @@ namespace UI.Controllers
             {
                 var dashboardVM = new DashboardViewModel
                 {
-                    Users = _serviceManager.User.GetAll(),
+                    Users = _serviceManager.UserData.GetAll(),
                 };
 
                 return View("Dashboard", dashboardVM);
