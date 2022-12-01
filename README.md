@@ -2,7 +2,7 @@
 Template for ASP.NET MVC Web Apps with .NET 6
 
 ## Getting Started
-1. Clone the repo
+1. Clone the repo/download the latest release
 2. Put the MVCTemplate ZIP in <your navigation>\Visual Studio 2022\Templates\ProjectTemplates 
 3. Open Visual Studio 2022
 4. Create a new project
